@@ -22,7 +22,8 @@
         <label>O que você deseja calcular?</label><br>
         <input type="radio" name="tipo" value="simples" required> Juros<br>
         <input type="radio" name="tipo" value="capital"> Capital<br>
-        <input type="radio" name="tipo" value="taxa"> Taxa<br><br>
+        <input type="radio" name="tipo" value="taxa"> Taxa<br>
+        <input type="radio" name="tipo" value="tempo"> Prazo (tempo)<br><br>
 
         <input type="submit" value="Calcular!">
     </form>
@@ -77,6 +78,20 @@
                 echo "Capital: R$ " . number_format($capital, 2, ',', '.') . "<br>";
                 echo "Tempo: " . $tempo . "<br>";
                 echo "<strong>Taxa: " . number_format($taxa_percentual, 2, ',', '.') . "%</strong>";
+            }
+
+        } elseif ($tipo == "tempo") {
+            // Calcular Prazo (tempo)
+            if ($juros === null || $juros == 0 || $capital === null || $capital == 0 || $taxa === null || $taxa == 0) {
+                echo "Erro: informe valores válidos de juros, capital e taxa para calcular o tempo.";
+            } else {
+                $taxa_decimal = $taxa / 100;
+                $tempo = $juros / ($capital * $taxa_decimal);
+
+                echo "Juros: R$ " . number_format($juros, 2, ',', '.') . "<br>";
+                echo "Capital: R$ " . number_format($capital, 2, ',', '.') . "<br>";
+                echo "Taxa: " . $taxa . "%<br>";
+                echo "<strong>Tempo: " . number_format($tempo, 2, ',', '.') . "</strong>";
             }
 
         } else {
